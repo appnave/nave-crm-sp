@@ -63,9 +63,9 @@ class DbCrmCustomer
             $query .= " WHERE customers.supervisor_id IS NOT NULL AND customers.manager_id IS NOT NULL";
         }
         $query .= " LIMIT :limit OFFSET :offset";
-        
+
         return DB::connection('crm')->select($query, [
-            'limit' => $limit,
+            'limit'  => $limit,
             'offset' => $offset,
         ]);
     }

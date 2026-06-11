@@ -35,23 +35,23 @@ class Customer extends BaseModel
     }
 
     public const TYPE_LIST = [
-        'cpf' => 'Pessoa física',
+        'cpf'  => 'Pessoa física',
         'cnpj' => 'Pessoa jurídica'
     ];
 
     public const KIND_LIST = [
-        'customer' => 'Cliente',
-        'guarantor' => 'Fiador',
+        'customer'       => 'Cliente',
+        'guarantor'      => 'Fiador',
         'representative' => 'Representante',
-        'spouse' => 'Cônjuge',
-        'procurator' => 'Procurador',
+        'spouse'         => 'Cônjuge',
+        'procurator'     => 'Procurador',
         'joint_purchase' => 'Compra conjunta'
     ];
 
     public const PWD_TYPE_LIST = [
-        'visual' => 'Visual',
-        'hearing' => 'Auditiva',
-        'mental' => 'Mental',
+        'visual'   => 'Visual',
+        'hearing'  => 'Auditiva',
+        'mental'   => 'Mental',
         'physical' => 'Física',
         'multiple' => 'Múltipla',
     ];
@@ -86,8 +86,8 @@ class Customer extends BaseModel
 
     protected $casts = [
         'is_incomplete_registration' => 'boolean',
-        'binding_civil_status' => 'boolean',
-        'is_active' => 'boolean',
+        'binding_civil_status'       => 'boolean',
+        'is_active'                  => 'boolean',
     ];
 
     public function bonds(): BelongsToMany

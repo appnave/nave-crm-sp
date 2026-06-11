@@ -3,7 +3,6 @@
 namespace BildVitta\SpCrm\Console\Commands\Messages;
 
 use BildVitta\SpCrm\Console\Commands\Messages\Resources\MessageCustomer;
-use Exception;
 use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPSSLConnection;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -78,7 +77,7 @@ class CustomersWorkerCommand extends Command
     {
         $this->connect();
         $this->channel = $this->connection->channel();
-        
+
         $queueName = config('sp-crm.rabbitmq.queue.customers');
         $callback = [$this->messageCustomer, 'process'];
         $this->channel->basic_consume(
@@ -87,7 +86,7 @@ class CustomersWorkerCommand extends Command
         );
 
         $this->channel->consume();
-        
+
         $this->closeChannel();
         $this->closeConnection();
     }
@@ -137,7 +136,7 @@ class CustomersWorkerCommand extends Command
         $options = [
             'heartbeat' => $heartbeat
         ];
-        
+
         if (app()->isLocal()) {
             $this->connection = new AMQPStreamConnection(
                 host: $host,

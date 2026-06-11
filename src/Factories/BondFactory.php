@@ -31,10 +31,10 @@ class BondFactory extends Factory
         $bond = Customer::inRandomOrder()->where('id', '!=', $customer->id)->first();
 
         return [
-            'crm_customer_id' => $customer->id,
-            'bond_crm_customer_id' => $bond->id,
+            'crm_customer_id'        => $customer->id,
+            'bond_crm_customer_id'   => $bond->id,
             'bond_crm_customer_uuid' => $bond->uuid,
-            'kind' => $bond->kind,
+            'kind'                   => $bond->kind,
         ];
     }
 }
