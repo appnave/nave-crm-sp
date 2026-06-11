@@ -24,6 +24,7 @@ return [
         ],
         'queue' => [
             'customers' => env('RABBITMQ_QUEUE_CUSTOMERS'),
-        ]
+        ],
+        'use_ssl' => env('RABBITMQ_USE_SSL', true),
     ],
 ];
