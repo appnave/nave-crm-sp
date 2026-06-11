@@ -29,20 +29,20 @@ class CustomerFactory extends Factory
         return [
             'uuid' => fake()->uuid(),
 
-            'name' => fake()->name,
-            'phone' => fake()->phoneNumber,
+            'name'      => fake()->name,
+            'phone'     => fake()->phoneNumber,
             'phone_two' => fake()->phoneNumber,
-            'email' => fake()->unique()->safeEmail,
-            'document' => fake()->cpf,
-            
-            'user_hub_id' => config('sp-crm.model_user')::inRandomOrder()->first(),
-            'type' => fake()->randomElement(array_keys(Customer::TYPE_LIST)),
-            'nationality' => fake()->words(2, true),
-            'occupation' => fake()->words(2, true),
-            'birthday' => fake()->date,
-            'civil_status' => fake()->words(2, true),
-            'binding_civil_status' => fake()->words(2, true),
-            'income' => fake()->randomFloat(2, 1000, 10000),
+            'email'     => fake()->unique()->safeEmail,
+            'document'  => fake()->cpf,
+
+            'user_hub_id'                => config('sp-crm.model_user')::inRandomOrder()->first(),
+            'type'                       => fake()->randomElement(array_keys(Customer::TYPE_LIST)),
+            'nationality'                => fake()->words(2, true),
+            'occupation'                 => fake()->words(2, true),
+            'birthday'                   => fake()->date,
+            'civil_status'               => fake()->words(2, true),
+            'binding_civil_status'       => fake()->words(2, true),
+            'income'                     => fake()->randomFloat(2, 1000, 10000),
             'is_incomplete_registration' => fake()->boolean,
         ];
     }

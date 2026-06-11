@@ -6,20 +6,20 @@ return [
     'model_user' => '\App\Models\User',
 
     'db' => [
-        'host' => env('CRM_DB_HOST', '127.0.0.1'),
-        'port' => env('CRM_DB_PORT', '3306'),
+        'host'     => env('CRM_DB_HOST', '127.0.0.1'),
+        'port'     => env('CRM_DB_PORT', '3306'),
         'database' => env('CRM_DB_DATABASE', 'forge'),
         'username' => env('CRM_DB_USERNAME', 'forge'),
         'password' => env('CRM_DB_PASSWORD', ''),
     ],
 
     'rabbitmq' => [
-        'host' => env('RABBITMQ_HOST'),
-        'port' => env('RABBITMQ_PORT'),
-        'user' => env('RABBITMQ_USER'),
-        'password' => env('RABBITMQ_PASSWORD'),
+        'host'        => env('RABBITMQ_HOST'),
+        'port'        => env('RABBITMQ_PORT'),
+        'user'        => env('RABBITMQ_USER'),
+        'password'    => env('RABBITMQ_PASSWORD'),
         'virtualhost' => env('RABBITMQ_VIRTUALHOST', '/'),
-        'exchange' => [
+        'exchange'    => [
             'customers' => env('RABBITMQ_EXCHANGE_CUSTOMERS', 'customers'),
         ],
         'queue' => [

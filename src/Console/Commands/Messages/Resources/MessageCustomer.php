@@ -22,7 +22,7 @@ class MessageCustomer
      * @var string
      */
     public const CREATED = 'customers.created';
-    
+
     /**
      * @var string
      */
@@ -69,20 +69,20 @@ class MessageCustomer
             ->whereHubUuid($customer->user_uuid)
             ->first();
         $data = [
-            'uuid' => $customer->uuid,
-            'user_hub_id' => $userHub?->id,
-            'name' => $customer->name,
-            'phone' => $customer->phone,
-            'phone_two' => $customer->phone_two,
-            'email' => $customer->email,
-            'type' => $customer->type,
-            'document' => $customer->document,
-            'nationality' => $customer->nationality,
-            'occupation' => $customer->occupation,
-            'birthday' => $customer->birthday === '0000-00-00' ? null : $customer->birthday,
-            'civil_status' => $customer->civil_status,
-            'binding_civil_status' => $customer->binding_civil_status,
-            'income' => $customer->income,
+            'uuid'                       => $customer->uuid,
+            'user_hub_id'                => $userHub?->id,
+            'name'                       => $customer->name,
+            'phone'                      => $customer->phone,
+            'phone_two'                  => $customer->phone_two,
+            'email'                      => $customer->email,
+            'type'                       => $customer->type,
+            'document'                   => $customer->document,
+            'nationality'                => $customer->nationality,
+            'occupation'                 => $customer->occupation,
+            'birthday'                   => $customer->birthday === '0000-00-00' ? null : $customer->birthday,
+            'civil_status'               => $customer->civil_status,
+            'binding_civil_status'       => $customer->binding_civil_status,
+            'income'                     => $customer->income,
             'is_incomplete_registration' => $customer->is_incomplete_registration,
         ];
         if (isset($customer->is_active)) {

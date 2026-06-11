@@ -35,7 +35,7 @@ class CustomerImport
         if (isset($customer->supervisor_uuid)) {
             $supervisorId = $modelUser::where('hub_uuid', $customer->supervisor_uuid)->value('id');
         }
-        
+
         $realEstateAgencyId = null;
         if (isset($customer->real_estate_agency_uuid)) {
             $realEstateAgencyId = HubCompany::where('uuid', $customer->real_estate_agency_uuid)->value('id');

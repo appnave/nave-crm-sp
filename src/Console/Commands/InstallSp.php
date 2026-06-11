@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpMissingFieldTypeInspection */
 
 namespace BildVitta\SpCrm\Console\Commands;
@@ -21,7 +22,7 @@ class InstallSp extends Command
      */
     private const VENDOR_PUBLISH_CONFIG_PARAMS = [
         '--provider' => SpCrmServiceProvider::class,
-        '--tag' => 'sp-crm-config'
+        '--tag'      => 'sp-crm-config'
     ];
 
     /**
@@ -156,7 +157,7 @@ class InstallSp extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => SpCrmServiceProvider::class,
-            '--tag' => 'seeders'
+            '--tag'      => 'seeders'
         ]);
     }
 
