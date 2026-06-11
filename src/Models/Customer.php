@@ -74,12 +74,12 @@ class Customer extends BaseModel
     ];
 
     protected $casts = [
-        'is_incomplete_registration' => 'boolean',
-        'binding_civil_status' => 'boolean',
+        'is_incomplete_registration'  => 'boolean',
+        'binding_civil_status'        => 'boolean',
         'binding_signer_civil_status' => 'boolean',
-        'is_active' => 'boolean',
-        'income' => 'real',
-        'informal_income' => 'real',
+        'is_active'                   => 'boolean',
+        'income'                      => 'real',
+        'informal_income'             => 'real',
     ];
 
     public function __construct(array $attributes = [])

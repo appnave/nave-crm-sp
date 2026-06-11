@@ -141,7 +141,7 @@ class CustomersWorkerCommand extends Command
         if (app()->isLocal()) {
             $useSsl = false;
         }
-        
+
         if ($useSsl) {
             $this->connection = new AMQPSSLConnection(
                 host: $host,
