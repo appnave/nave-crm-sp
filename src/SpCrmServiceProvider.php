@@ -19,7 +19,7 @@ class SpCrmServiceProvider extends PackageServiceProvider
      * @var string $seeder
      */
     protected string $seeder = 'SpCrmSeeder';
-    
+
     /**
      * @param  Package  $package
      *
@@ -44,7 +44,7 @@ class SpCrmServiceProvider extends PackageServiceProvider
                 'add_new_columns_on_customers_table',
             ])
             ->runsMigrations();
-    
+
         $package
             ->name('sp-crm')
             ->hasCommands([

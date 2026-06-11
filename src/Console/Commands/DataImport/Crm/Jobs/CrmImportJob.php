@@ -137,9 +137,9 @@ class CrmImportJob implements ShouldQueue
         }
         $worker->error = [
             'message' => $exception->getMessage(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine(),
-            'trace' => $exception->getTraceAsString(),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
+            'trace'   => $exception->getTraceAsString(),
         ];
         $worker->status = 'error';
         $worker->save();
@@ -152,20 +152,20 @@ class CrmImportJob implements ShouldQueue
     {
         config([
             'database.connections.crm' => [
-                'driver' => 'mysql',
-                'host' => config('sp-crm.db.host'),
-                'port' => config('sp-crm.db.port'),
-                'database' => config('sp-crm.db.database'),
-                'username' => config('sp-crm.db.username'),
-                'password' => config('sp-crm.db.password'),
-                'unix_socket' => env('DB_SOCKET', ''),
-                'charset' => 'utf8mb4',
-                'collation' => 'utf8mb4_unicode_ci',
-                'prefix' => '',
+                'driver'         => 'mysql',
+                'host'           => config('sp-crm.db.host'),
+                'port'           => config('sp-crm.db.port'),
+                'database'       => config('sp-crm.db.database'),
+                'username'       => config('sp-crm.db.username'),
+                'password'       => config('sp-crm.db.password'),
+                'unix_socket'    => env('DB_SOCKET', ''),
+                'charset'        => 'utf8mb4',
+                'collation'      => 'utf8mb4_unicode_ci',
+                'prefix'         => '',
                 'prefix_indexes' => true,
-                'strict' => true,
-                'engine' => null,
-                'options' => [],
+                'strict'         => true,
+                'engine'         => null,
+                'options'        => [],
             ]
         ]);
     }

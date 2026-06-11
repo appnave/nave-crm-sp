@@ -1,70 +1,136 @@
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/bildvitta/sp-crm.svg?style=flat-square)](https://packagist.org/packages/bildvitta/sp-crm)
-[![Total Downloads](https://img.shields.io/packagist/dt/bildvitta/sp-crm.svg?style=flat-square)](https://packagist.org/packages/bildvitta/sp-crm)
+# `appnave/nave-crm-sp`
 
-## Introduction
+## Visão Geral
 
-The SP (Space Probe) package is responsible for collecting remote data updates for the module, keeping the data structure similar as possible, through the message broker.
+Pacote privado Laravel para integração do CRM SP via Composer. Ele publica configuração, migrations, seeders e comandos Artisan para instalação, importação de dados e consumo da fila RabbitMQ.
 
-## Installation
+## Requisitos
 
-You can install the package via composer:
+- PHP `^8.0` até `^8.3`
+- Laravel `8`, `9`, `10` ou `11`
+- Acesso ao repositório privado via Composer
+- Banco MySQL para a conexão `crm`
+- RabbitMQ para o worker de mensagens
 
-```bash 
-composer require bildvitta/sp-crm:dev-develop
+## Acesso aos Repositórios Privados
+
+No projeto cliente, adicione o repositório VCS no `composer.json`:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/appnave/nave-crm-sp"
+    }
+  ]
+}
 ```
 
-For everything to work perfectly in addition to having the settings file published in your application, run the command below:
+Instale o pacote:
 
 ```bash
-php artisan sp:install
+composer require appnave/nave-crm-sp:dev-develop
 ```
 
-## Configuration
-
-This is the contents of the published config file:
-
-```php
-return [
-    'table_prefix' => env('MS_SP_CRM_TABLE_PREFIX', 'crm_'),
-    'db' => [
-        'host' => env('CRM_DB_HOST', '127.0.0.1'),
-        'port' => env('CRM_DB_PORT', '3306'),
-        'database' => env('CRM_DB_DATABASE', 'forge'),
-        'username' => env('CRM_DB_USERNAME', 'forge'),
-        'password' => env('CRM_DB_PASSWORD', ''),
-    ],
-    'rabbitmq' => [
-        'host' => env('RABBITMQ_HOST'),
-        'port' => env('RABBITMQ_PORT', '5672'),
-        'user' => env('RABBITMQ_USER'),
-        'password' => env('RABBITMQ_PASSWORD'),
-        'virtualhost' => env('RABBITMQ_VIRTUALHOST', '/'),
-        'exchange' => [],
-        'queue' => []
-    ],
-];
-```
-
-## Importing data
-
-You can import initial data from the parent module by setting the database connection data in the configuration file. However, it will be necessary to import the data from the dependent module first: sp-hub.
+Autenticação local do Composer com token GitHub:
 
 ```bash
-php artisan dataimport:crm_customers
+composer config -g github-oauth.github.com <YOUR_TOKEN>
 ```
 
-## Database seeder
+Em GitHub Actions, configure `COMPOSER_AUTH`:
 
-You can seed your database with fake data to work with. However, it will be necessary to seed the other dependency first: sp-hub.
+```yaml
+env:
+  COMPOSER_AUTH: >-
+    {"github-oauth":{"github.com":"${{ secrets.COMPOSER_GITHUB_TOKEN }}"}}
+```
+
+Se o projeto cliente também consumir outras dependências privadas, mantenha a mesma estratégia de `repositories` e autenticação no ambiente de CI.
+
+## Instalação Local
+
+1. Adicione o repositório VCS no projeto cliente.
+2. Instale o pacote com Composer.
+3. Execute a instalação do pacote:
 
 ```bash
-php artisan db:seed --class=SpCrmSeeder
+php artisan sp-crm:install
 ```
 
-## Running the worker
+O comando:
 
-After setting the message broker access data in the configuration file, you can run the worker to keep the data up to date.
+- publica `config/sp-crm.php`
+- publica as migrations do pacote
+- executa `migrate`
+- publica `database/seeders/SpCrmSeeder.php`
+- executa `db:seed --class=SpCrmSeeder`
+
+## Configuração
+
+Configure as variáveis usadas pelo pacote:
+
+```env
+MS_SP_CRM_TABLE_PREFIX=crm_
+
+CRM_DB_HOST=127.0.0.1
+CRM_DB_PORT=3306
+CRM_DB_DATABASE=forge
+CRM_DB_USERNAME=forge
+CRM_DB_PASSWORD=
+
+RABBITMQ_HOST=
+RABBITMQ_PORT=5672
+RABBITMQ_USER=
+RABBITMQ_PASSWORD=
+RABBITMQ_VIRTUALHOST=/
+RABBITMQ_EXCHANGE_CUSTOMERS=customers
+RABBITMQ_QUEUE_CUSTOMERS=
+```
+
+O arquivo de configuração publicado fica em `config/sp-crm.php`.
+
+## Comandos Úteis
+
+### Instalação
+
+```bash
+php artisan sp-crm:install
+```
+
+### Importação de clientes
+
+```bash
+php artisan dataimport:crm_customers --select=500 --offset=0 --with_sales_team
+```
+
+Opções:
+
+- `--select` define o lote de registros
+- `--offset` define o ponto inicial da importação
+- `--with_sales_team` inclui dados de time comercial quando disponível
+
+### Worker RabbitMQ
 
 ```bash
 php artisan rabbitmqworker:customers
 ```
+
+### Style
+
+```bash
+composer run check-style
+composer run fix-style
+```
+
+## Documentação da API
+
+Este pacote não inclui Swagger/OpenAPI.
+
+## Informações Adicionais
+
+- O pacote depende do modelo `App\Models\Worker` no projeto cliente para executar a importação.
+- A conexão `crm` é configurada em tempo de execução pelo comando de importação.
+- O pacote registra automaticamente seus providers, migrations e comandos via `Spatie\LaravelPackageTools`.
+- O namespace PHP atual é `BildVitta\SpCrm`.

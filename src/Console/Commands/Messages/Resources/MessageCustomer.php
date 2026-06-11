@@ -22,7 +22,7 @@ class MessageCustomer
      * @var string
      */
     public const CREATED = 'customers.created';
-    
+
     /**
      * @var string
      */
@@ -69,32 +69,32 @@ class MessageCustomer
             ->whereHubUuid($customer->user_uuid)
             ->first();
         $data = [
-            'uuid' => $customer->uuid,
-            'user_hub_id' => $userHub?->id,
-            'name' => $customer->name,
-            'phone' => $customer->phone,
-            'phone_two' => $customer->phone_two,
-            'email' => $customer->email,
-            'type' => $customer->type,
-            'document' => $customer->document,
-            'nationality' => $customer->nationality,
-            'occupation' => $customer->occupation,
-            'birthday' => $customer->birthday === '0000-00-00' ? null : $customer->birthday,
-            'civil_status' => $customer->civil_status,
-            'binding_civil_status' => $customer->binding_civil_status,
+            'uuid'                        => $customer->uuid,
+            'user_hub_id'                 => $userHub?->id,
+            'name'                        => $customer->name,
+            'phone'                       => $customer->phone,
+            'phone_two'                   => $customer->phone_two,
+            'email'                       => $customer->email,
+            'type'                        => $customer->type,
+            'document'                    => $customer->document,
+            'nationality'                 => $customer->nationality,
+            'occupation'                  => $customer->occupation,
+            'birthday'                    => $customer->birthday === '0000-00-00' ? null : $customer->birthday,
+            'civil_status'                => $customer->civil_status,
+            'binding_civil_status'        => $customer->binding_civil_status,
             'binding_signer_civil_status' => $customer->binding_signer_civil_status,
-            'income' => $customer->income,
-            'informal_income' => $customer->informal_income,
-            'is_incomplete_registration' => $customer->is_incomplete_registration,
-            'rg' => $customer->rg,
-            'ie' => $customer->ie,
-            'address' => $customer->address,
-            'street_number' => $customer->street_number,
-            'complement' => $customer->complement,
-            'neighborhood' => $customer->neighborhood,
-            'city' => $customer->city,
-            'state' => $customer->state,
-            'postal_code' => $customer->postal_code,
+            'income'                      => $customer->income,
+            'informal_income'             => $customer->informal_income,
+            'is_incomplete_registration'  => $customer->is_incomplete_registration,
+            'rg'                          => $customer->rg,
+            'ie'                          => $customer->ie,
+            'address'                     => $customer->address,
+            'street_number'               => $customer->street_number,
+            'complement'                  => $customer->complement,
+            'neighborhood'                => $customer->neighborhood,
+            'city'                        => $customer->city,
+            'state'                       => $customer->state,
+            'postal_code'                 => $customer->postal_code,
         ];
         if (isset($customer->is_active)) {
             $data['is_active'] = $customer->is_active;

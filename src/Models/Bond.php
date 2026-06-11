@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bond extends Model
 {
     use HasFactory;
-    
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
